@@ -3,7 +3,7 @@ import * as ReactDOMServer from 'react-dom/server'
 import Koa from 'koa'
 
 export interface SsrReactOpts {
-  render: (ctx: Koa.Context) => Promise<React.ReactElement<any>>
+  render: <P = {}> (ctx: Koa.Context) => Promise<React.ReactElement<P>>
 }
 
 export function createMiddleware (opts: SsrReactOpts) {
@@ -14,8 +14,3 @@ export function createMiddleware (opts: SsrReactOpts) {
     ctx.body = ReactDOMServer.renderToNodeStream(component)
   } as Koa.Middleware
 }
-
-// /post/abc
-
-// =>
-
