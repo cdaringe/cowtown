@@ -1,0 +1,25 @@
+{
+	"folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "packages/ssr-react"
+    },
+    {
+      "path": "packages/cowtown"
+    }
+  ],
+	"settings": {
+    "files.exclude": {
+      "**/*.js": false,
+      "**/*.d.ts": true,
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true
+    },
+    "cSpell.enabled": false
+  }
+}
