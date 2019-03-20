@@ -6,7 +6,9 @@
   "author": "cdaringe <christopher.dieringer@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "bootstrap": "yarn && lerna bootstrap"
+    "bootstrap": "yarn && lerna bootstrap",
+    "build": "tsc",
+    "test": "lerna exec -- yarn test"
   },
   "devDependencies": {
     "@types/node": "^10.12.18",

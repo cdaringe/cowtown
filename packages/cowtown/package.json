@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "ava"
+    "test": "ava test/**/*.test.js"
   },
   "devDependencies": {
     "@types/dotenv-safe": "^5.0.3",

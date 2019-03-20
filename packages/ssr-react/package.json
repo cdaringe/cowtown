@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "main": "cowtown-ssr-react.js",
   "license": "MIT",
+  "scripts": {
+    "test": "echo 'none yet!'"
+  },
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
