@@ -4,12 +4,33 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "browser-or-node":"^1.1.0",
+    "cowtown-ssr-react": "*",
+    "@types/joi": "^14.3.2",
     "@types/koa": "^2.0.48",
+    "@types/koa-mount": "^3.0.1",
     "@types/koa-router": "^7.0.40",
+    "@types/koa-static": "^4.0.1",
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.3",
+    "@types/react-redux": "^7.0.5",
+    "@types/react-router": "^4.4.5",
+    "@types/redux": "^3.6.0",
+    "@types/parcel-bundler":"^1.10.2",
+    "joi": "^14.3.1",
+    "koa": "^2.7.0",
+    "koa-mount": "^4.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "parcel-bundler": "^1.12.3",
+    "parcel-plugin-bundle-visualiser": "^1.2.0",
+    "perish": "^1.0.2",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-redux": "^6.0.1",
+    "react-router": "^5.0.0",
+    "redux": "^4.0.1",
     "typescript": "^3.3.4000"
   },
-  "dependencies": {
-    "koa": "^2.7.0",
-    "koa-router": "^7.4.0"
-  }
+  "dependencies": {}
 }
