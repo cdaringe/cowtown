@@ -11,20 +11,22 @@ async function start () {
   const fileserver = new Koa()
   fileserver.use(serve(PUBLIC_DIRNAME))
   const api = new Koa()
-  api.use(ctx => { ctx.body = { ok: true }})
+  api.use(ctx => {
+    ctx.body = { ok: true }
+  })
   app.use(mount('/api', api))
   app.use(mount('/', fileserver))
   app.listen(3000)
 
-// $ curl localhost:3000
-// <html>
-//   <h1>ahoy, matees</h1>
-// </html>
+  // $ curl localhost:3000
+  // <html>
+  //   <h1>ahoy, matees</h1>
+  // </html>
 
-// $ curl localhost:3000/kittens/talk.txt
-// meow
+  // $ curl localhost:3000/kittens/talk.txt
+  // meow
 
-// $ curl localhost:3000/api
-// { "ok": true }
+  // $ curl localhost:3000/api
+  // { "ok": true }
 }
 start()

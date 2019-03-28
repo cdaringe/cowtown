@@ -1,10 +1,10 @@
 require('perish')
-import { ConnectedApp } from './app'
-import { createMiddleware as ssr } from "cowtown-ssr-react"
 import Koa from 'koa'
-import * as React from 'react'
 import Bundler from 'parcel-bundler'
 import * as path from 'path'
+// import * as React from 'react'
+// import { ConnectedApp } from './app'
+// import { createMiddleware as ssr } from 'cowtown-ssr-react'
 
 const ENTRY_FILENAME = path.resolve(__dirname, 'index.html')
 

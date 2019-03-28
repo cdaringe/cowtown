@@ -6,9 +6,11 @@ type Config = {
 }
 
 export const fromEnv: () => Partial<Config> = () => {
-  const partialConfig: Partial<Config> = {};
+  const partialConfig: Partial<Config> = {}
   if (process.env.PORT) partialConfig.port = parseInt(process.env.PORT)
-  if (process.env.LOG_LEVEL) partialConfig.logLevel = process.env.LOG_LEVEL as any
+  if (process.env.LOG_LEVEL) {
+    partialConfig.logLevel = process.env.LOG_LEVEL as any
+  }
   return partialConfig
 }
 
@@ -26,10 +28,14 @@ export const create: (partial?: Partial<Config>) => Config = (partial = {}) => {
 }
 
 export const validate = (config: Config) => {
-  const res = joi.validate(config, {
-    port: joi.number().min(0),
-    logLevel: joi.any().valid('debug', 'info', 'warn', 'error', 'silent')
-  }, { presence: 'required' })
+  const res = joi.validate(
+    config,
+    {
+      port: joi.number().min(0),
+      logLevel: joi.any().valid('debug', 'info', 'warn', 'error', 'silent')
+    },
+    { presence: 'required' }
+  )
   if (res.error) throw res.error
   return config
 }

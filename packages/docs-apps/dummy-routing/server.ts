@@ -3,7 +3,7 @@ async function start () {
   const app = new Koa()
   app.use(ctx => {
     if (ctx.path === '/hello' && ctx.method === 'GET') {
-      return ctx.body = 'world'
+      return (ctx.body = 'world')
     }
     if (ctx.path === '/beep' && ctx.method === 'POST') {
       console.log('bop')

@@ -1,9 +1,11 @@
-import * as React from "react"
+import * as React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
 import Koa from 'koa'
 
 export interface SsrReactOpts {
-  render: <P = {}> (ctx: Koa.Context) => React.ReactElement<P> | Promise<React.ReactElement<P>>
+  render: <P = {}>(
+    ctx: Koa.Context
+  ) => React.ReactElement<P> | Promise<React.ReactElement<P>>
 }
 
 export function createMiddleware (opts: SsrReactOpts) {
