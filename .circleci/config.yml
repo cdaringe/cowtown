@@ -42,9 +42,9 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      # test
       - run: yarn build
       - run: yarn test
+      - run: yarn lint
       # - run:
       #     name: release
       #     command: npm run semantic-release || true
