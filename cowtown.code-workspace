@@ -8,6 +8,12 @@
     },
     {
       "path": "packages/cowtown"
+    },
+    {
+      "path": "packages/docs"
+    },
+    {
+      "path": "packages/docs-apps"
     }
   ],
 	"settings": {

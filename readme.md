@@ -1,6 +1,12 @@
 # cowtown
 
-koajs and friends, with a few optional, prebaked middleware-pipelines
+a cookbook for pragmatic server-side application development via middleware-pipelines.
+
+cowtown covers the _howto_ of a wide range of application concerns, and demonstrates fulfillment of those concerns via [koa](https://koajs.com).
+
+cowtown is generally _not_ software--it is a guide on how to effectively use
+the abundance of already-existing-and-well-designed software.  in some cases,
+cowtown ships a minimal amount of middleware to support some common use cases.
 
 **cowtown is just an experiement** - do not use
 
@@ -8,20 +14,21 @@ koajs and friends, with a few optional, prebaked middleware-pipelines
 
 ## why not just koa?
 
-please, by all my means, use _just koa_. however, if you orchestrate a myriad of services with similar middleware flows, it's convenient to version a few said pipes for plug-n-play ability.
-
-we strive to make as many small pieces of the middlewares tunable via function
-arguments, whilst still offering a decent off-the-shelf experience.
+please, by all my means, use _just koa_.  if you orchestrate a myriad of services with similar middleware flows, it may be convenient to version a few common middleware stacks for plug-n-play ability, which can be used in _conjunction_ with koa.
 
 ## target audience
 
-teams who want to share some common functionality
+all interested parties.
 
 ## goals
+
+encourage server develop that rewards:
 
 - **simple** over **easy**
   - pure ease is _not_ a goal.  we think it will be easy, but it's important to acknowledge that easy things are often complicated.  seeing how this software works (and its peer packages) should be easy to see, easy to debug, and easy to
   learn.
+- composition and flat-as-possible project dependency trees
+  - share community works, whilst avoiding deeply nested hard-to-[configure|debug|reason-about]
 
 ## provisions
 

@@ -1,0 +1,3 @@
+- start dev server - `npx parcel`
+- start dev server - `npx parcel build`
+- `NODE_ENV=production npx parcel build index.html`
