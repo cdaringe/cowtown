@@ -33,7 +33,8 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
-    "format": "prettier-standard --write \"src/**/*.js\""
+    "format": "prettier-standard --write \"src/**/*.js\"",
+    "test": "echo 'no tests'"
   },
   "devDependencies": {
     "prettier-standard": "^9.1.1"
