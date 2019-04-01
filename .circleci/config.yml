@@ -47,10 +47,11 @@ jobs:
       - run: yarn lint
       - run:
           command: |
+            set -euxo pipefail
             if [ "$CIRCLE_BRANCH" = "master" ];
             then
               cd packages/docs
-              yarn build
+              DEBUG=* yarn build --verbose
               npx gh-pages -d public/
             fi
       # - run:

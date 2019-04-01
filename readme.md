@@ -18,6 +18,6 @@ all interested parties.
 - documentation. share patterns and codified implementations for common application concerns
 - encourage server development that rewards:
     - simplicity over ease
-        - pure ease is _not_ a goal.  we think development using these strategies will be easy, but it's important to acknowledge that easy things are often complicated.  seeing how this software works (and its peer packages) should be easy to see, easy to debug, and easy to learn.
+        - ease is _not_ a goal.  we think development using these strategies will be easy, but it's important to acknowledge that easy things are often complicated.  seeing how this software works (and its peer packages) should be easy to see, easy to debug, and easy to learn.
     - composition and flat-as-possible project dependency trees
         - share community modules, whilst avoiding deeply nested hard-to-[configure|debug|reason-about] middleware packages
