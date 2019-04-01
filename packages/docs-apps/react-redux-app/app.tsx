@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { connect, Provider } from 'react-redux'
-import { createStore } from 'redux'
-// import * as ReactDOM from 'react-dom'
-// const { isNode } = require('browser-or-node')
+import { createStore, Store } from 'redux'
+import * as ReactDOM from 'react-dom'
+const { isNode } = require('browser-or-node')
 
 const INC = 'INC'
 const DEC = 'DEC'
@@ -20,8 +20,6 @@ function reducer (state = DEFAULT_STATE, action: any) {
   return state
 }
 
-const store = createStore(reducer)
-
 export const App = connect(
   state => state,
   dispatch => ({
@@ -36,16 +34,27 @@ export const App = connect(
   </div>
 ))
 
-export const ConnectedApp = () => (
+export const ConnectedApp = ({ store }: { store: Store }) => (
   <Provider store={store}>
     <App />
   </Provider>
 )
 
-// if (!isNode) {
-// const appNode = document.getElementById('app')
-// ReactDOM.hydrate(
-//   <ConnectedApp />,
-//   appNode
-// )
-// }
+export const createAppStore = (initialState: any) =>
+  createStore(reducer, initialState)
+
+if (isNode) {
+  // render an html page in the server process,
+  // and the react application to string from within
+} else {
+  const appNode = document.getElementById('app')
+  ReactDOM.hydrate(
+    <ConnectedApp store={createAppStore((window as any).INITIAL_STATE)} />,
+    appNode
+  )
+}
+
+// enable hot module reloading
+if ((module as any).hot) {
+  ;(module as any).hot.accept()
+}

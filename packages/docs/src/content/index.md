@@ -18,7 +18,7 @@ search: true
 
 ![](./cow.png) cowtown is about delivering value.  cowtown is not about code--it's about enabling value streams through code, ideally via functional composition.
 
-cowtown is not a framework.  quite the opposite--this project aims to show you how
+cowtown is not a framework.  quite the opposite--this project aims to show you that
 existing, accessible, open middlewares can provide unmatched value.  it's about showing
 that they are easy to link together, and how deep understanding and simplicity can be
 achieved in a server-side web program when using a select few tools strategically.
@@ -355,15 +355,155 @@ convenient to ship only one executable to provide both value streams.
 
 # isomorphic rendering
 
+> react redux app
+
+```html
+<!--
+  react-redux-app/index.html
+  parcel _and_ our parcel middleware will use this html
+  template. note that parcel wants src=app.tsx as an
+  entrypoint, which isn't proper HTML ;)
+-->
+<html>
+<head>
+  <title>react-redux ssr demo</title>
+  <!-- head-content -->
+</head>
+  <div id="app"><!-- ssr-content --></div>
+  <script src="app.tsx"></script>
+</html>
+```
+
+```typescript
+// react-redux-app/app.tsx - a barebones react-redux application
+
+function reducer (state = DEFAULT_STATE, action: any) {
+  // ...
+}
+
+export const App = connect(
+  state => state,
+  dispatch => ({
+    inc: () => dispatch({ type: INC }),
+    dec: () => dispatch({ type: DEC })
+  })
+)((props: any) => (
+  <div>
+    {props.count}
+    <button onClick={props.dec}>-</button>
+    <button onClick={props.inc}>+</button>
+  </div>
+))
+
+export const ConnectedApp = ({ store }: { store: Store }) => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+
+export const createAppStore = (initialState: any) =>
+  createStore(reducer, initialState)
+
+if (isNode) {
+  // render an html page in the server process,
+  // and the react application to string from within
+} else {
+  const appNode = document.getElementById('app')
+  ReactDOM.hydrate(
+    <ConnectedApp store={createAppStore((window as any).INITIAL_STATE)} />,
+    appNode
+  )
+}
+
+// react-redux-app/server.ts
+const ENTRY_FILENAME = path.resolve(__dirname, 'index.html')
+async function start () {
+  const outFile = path.resolve(__dirname, 'dist', 'index.html')
+  const app = new Koa()
+  const outDir = path.resolve(__dirname, 'dist')
+  // create a ui application bundler
+  const options = {
+    outDir,
+    outFile,
+    watch: process.env.NODE_ENV === 'development',
+    minify: process.env.NODE_ENV !== 'development',
+    scopeHoist: false,
+    hmr: process.env.NODE_ENV === 'development',
+    detailedReport: false
+  }
+  const bundler = new Bundler(ENTRY_FILENAME, options)
+  bundler.bundle()
+  const staticMiddleware = serveStatic(outDir)
+  const isomorphicRenderMiddleware = createMiddleware({
+    bundler,
+    renderHtmlMiddleware: async (ctx, next) => {
+      // parcel has already compiled our app now, and has
+      // a fancy _proper_ html entrypoint at outFile, which has all of our original
+      // html + comments, but modified to point to built assets (e.g. js files,
+      // versus tsx files). serve that html asset, with redux state _and_
+      // a stringified react => html tree!
+      const outFileBuffer = await fs.readFile(outFile)
+      const [preHeadClose, postHeadClose ] = outFileBuffer.toString()
+        .split(/<!--.*head-content.*-->/)
+      const [ preAppEntry, postAppEntry] = postHeadClose
+        .split(/<!--.*ssr-content.*-->/)
+      ctx.status = 200
+      const htmlStream = new CombinedStream()
+      const initialState = { count: 99 } // you'd probably do something more interesting here
+      // stream the build html file, but with react/redux data spliced in
+      ;[
+        preHeadClose,
+        // send the initial state date to the browser, so it can use it for hydration
+        `<script>window.INITIAL_STATE = ${JSON.stringify(initialState)}</script>`,
+        preAppEntry,
+        // render react's html using our desired initial state
+        ReactDOMServer.renderToNodeStream(ConnectedApp({ store: createAppStore(initialState) })),
+        postAppEntry
+      ].map(content => htmlStream.append(content))
+      ctx.body = htmlStream
+      ctx.type = 'html'
+      await next()
+    },
+    staticMiddleware
+  })
+  app.use((ctx, next) => {
+    return isomorphicRenderMiddleware(ctx, next)
+  })
+  app.listen(3000)
+}
+start()
+```
+
+isomorphic rendering, whilst considered an advanced concept, is conceptually simple.
+the objective is to render rich html on first page load for the user, such that
+they may begin viewing content immediately. on page load, the interactive
+native web-application experience downloads and instatiates itself, asyncronously.
+the final result is that user gets content faster, as perceives your application to
+be much faster.
+
+there are many technology stacks, front-end and back-end to enable this workflow.
+this demonstration uses:
+
+- [react](https://reactjs.org) & [redux](https://redux.js.org) for the ui application
+- [koa-parcel-middleware](https://www.npmjs.com/package/koa-parcel-middleware) for integrating the ui application with the server, including an excellent development time experience
+- ...and koa of course for our server base
+
+the strategy is as follows:
+
+- create a web application bunder instance.  in this case, we will use parcel's bundler.  why do you need a bundler?  [webpack's doc cover this well](https://webpack.js.org/concepts/why-webpack/).  in a different world, you could use webpack/browserify/rollup/etc instead.
+- create a static asset middleware for serving ui assets (images, css files, etc)
+- create a parcel middleware with the bunder instance and the static fileserver middleware.  these two things together will build your ui, and serve it to browsers
+- mount the serving of the ui, generally to `/`.  in my example, i only use ui middleware for simplicity sake
+
+the web-application, when served using parcel's dev server, starts with no state.
+it's a basic counter app starting at 0 with incriment and decriment buttons.  however,
+you will see that when using server-side rendering, we provide an `initialState` where
+the count is equal to `99`.  because we rendered a react app with `count === 99`, the
+resultant html shows 99 to the user immediately.  once the javascript finishes
+downloading in the background, the buttons work starting from 99, because we `hydrate`d
+the react app with the same initial state (see `window.INITIAL_STATE`)!
 
 # performance - reject requests when overloaded
 
 add [koa-toobusy](https://github.com/nswbmw/koa-toobusy) early in your middleware
 stack.
-
-# recipes
-
-<a id="recipes" />
-
-weee
-
