@@ -9216,6 +9216,11 @@ koa-mount@^4.0.0:
     debug "^4.0.1"
     koa-compose "^4.1.0"
 
+koa-parcel-middleware@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/koa-parcel-middleware/-/koa-parcel-middleware-1.0.1.tgz#bd43437b9f135374ac01ff6c0c8d0980982914ea"
+  integrity sha512-DMqkT1Gkq+Bw3mMv5Fd+4YYDk5hGq2GQAt6sveNJ2qo/kdLpfwmID72R31kFB7vvdXPzelRg0vzwLzAXSK79dA==
+
 koa-router@^7.4.0:
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/koa-router/-/koa-router-7.4.0.tgz#aee1f7adc02d5cb31d7d67465c9eacc825e8c5e0"
