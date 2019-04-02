@@ -2,7 +2,7 @@
 
 a cookbook :book: for pragmatic server-side application development via middleware-pipelines.
 
-cowtown covers many _howto_s of a wide range of application concerns. it demonstrates fulfillment of those concerns via [koa](https://koajs.com).
+cowtown covers many _how-to's_ of a wide range of application concerns. it demonstrates fulfillment of those concerns via [koa](https://koajs.com).
 
 cowtown is generally _not_ software--it is mainly documentation, covering how to effectively use the abundance of existing software.  in some cases,
 cowtown ships a minimal amount of code to support some common use cases.
@@ -18,6 +18,6 @@ all interested parties.
 - documentation. share patterns and codified implementations for common application concerns
 - encourage server development that rewards:
     - simplicity over ease
-        - ease is _not_ a goal.  we think development using these strategies will be easy, but it's important to acknowledge that easy things are often complicated.  seeing how this software works (and its peer packages) should be easy to see, easy to debug, and easy to learn.
-    - composition and flat-as-possible project dependency trees
+    - composition
+    - flat-ish dependency trees
         - share community modules, whilst avoiding deeply nested hard-to-[configure|debug|reason-about] middleware packages
