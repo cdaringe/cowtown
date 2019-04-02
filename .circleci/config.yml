@@ -52,7 +52,7 @@ jobs:
             then
               cd packages/docs
               npx gatsby clean
-              DEBUG=* yarn build --verbose
+              DEBUG=gats*,cow* yarn build --verbose
               npx gh-pages -d public/
             fi
       # - run:
