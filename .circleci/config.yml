@@ -51,6 +51,7 @@ jobs:
             if [ "$CIRCLE_BRANCH" = "master" ];
             then
               cd packages/docs
+              npx gatsby clean
               DEBUG=* yarn build --verbose
               npx gh-pages -d public/
             fi
