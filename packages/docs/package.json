@@ -4,6 +4,8 @@
   "description": "cowtown documentation",
   "version": "1.0.0",
   "dependencies": {
+    "eslint": "^5.15.3",
+    "eslint-plugin-promise": "^4.0.1",
     "gatsby": "^2.0.76",
     "gatsby-image": "^2.0.20",
     "gatsby-plugin-manifest": "^2.0.9",
@@ -38,6 +40,7 @@
   },
   "devDependencies": {
     "gh-pages": "^2.0.1",
-    "prettier-standard": "^9.1.1"
+    "prettier-standard": "^9.1.1",
+    "typescript": "^3.1.6"
   }
 }
