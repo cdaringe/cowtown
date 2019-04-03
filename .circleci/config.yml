@@ -32,6 +32,8 @@ jobs:
               npx gatsby clean
               npx gatsby info
               DEBUG='gats*,cow*' yarn build --verbose
+              git config --global user.email "wa11edevbot@gmail.com"
+              git config --global user.name "wa11-e"
               node scripts/publish.js
             fi
       # - run:
