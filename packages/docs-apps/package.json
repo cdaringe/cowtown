@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "@types/combined-stream": "1.0.1",
+    "@types/combined-stream": "1.0.2",
     "@types/joi": "^14.3.2",
     "@types/koa": "^2.0.48",
     "@types/koa-mount": "^3.0.1",
@@ -12,7 +12,7 @@
     "@types/koa-static": "^4.0.1",
     "@types/parcel-bundler": "^1.10.2",
     "@types/react": "^16.8.8",
-    "@types/react-dom": "^16.8.3",
+    "@types/react-dom": "16.8.3",
     "@types/react-redux": "^7.0.5",
     "@types/react-router": "^4.4.5",
     "@types/redux": "^3.6.0",
