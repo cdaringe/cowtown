@@ -355,7 +355,7 @@ convenient to ship only one executable to provide both value streams.
 
 # isomorphic rendering
 
-> react redux app
+> isomorphic react redux app
 
 ```html
 <!--
@@ -376,7 +376,7 @@ convenient to ship only one executable to provide both value streams.
 
 ```typescript
 // react-redux-app/app.tsx - a barebones react-redux application
-
+const DEFAULT_STATE = { count: 0 }
 function reducer (state = DEFAULT_STATE, action: any) {
   // ...
 }
@@ -475,14 +475,14 @@ start()
 ```
 
 isomorphic rendering, whilst considered an advanced concept, is conceptually simple.
-the objective is to render rich html on first page load for the user, such that
-they may begin viewing content immediately. on page load, the interactive
-native web-application experience downloads and instatiates itself, asyncronously.
-the final result is that user gets content faster, as perceives your application to
-be much faster.
+the objective is to render a complete html page when a user requests your website, such that
+they may begin viewing content immediately. once the page loads, the interactive
+web-application experience downloads and instatiates itself, asyncronously.
+the final result is that user gets content faster, as hence perceives your application to
+be faster.
 
-there are many technology stacks, front-end and back-end to enable this workflow.
-this demonstration uses:
+there are many technology stacks, front-end and back-end, that enable this workflow.
+this particular demonstration uses:
 
 - [react](https://reactjs.org) & [redux](https://redux.js.org) for the ui application
 - [koa-parcel-middleware](https://www.npmjs.com/package/koa-parcel-middleware) for integrating the ui application with the server, including an excellent development time experience
@@ -492,11 +492,11 @@ the strategy is as follows:
 
 - create a web application bunder instance.  in this case, we will use parcel's bundler.  why do you need a bundler?  [webpack's doc cover this well](https://webpack.js.org/concepts/why-webpack/).  in a different world, you could use webpack/browserify/rollup/etc instead.
 - create a static asset middleware for serving ui assets (images, css files, etc)
-- create a parcel middleware with the bunder instance and the static fileserver middleware.  these two things together will build your ui, and serve it to browsers
-- mount the serving of the ui, generally to `/`.  in my example, i only use ui middleware for simplicity sake
+- create a parcel middleware with the bunder instance and the static fileserver middleware.  this will compile your ui and serve it to browsers on request
+- register the middleware. in my example, i only use ui middleware for simplicity sake
 
-the web-application, when served using parcel's dev server, starts with no state.
-it's a basic counter app starting at 0 with incriment and decriment buttons.  however,
+the web-application by default starts with minimal state.
+it's a basic counter app starting with the `count` at `0`. however,
 you will see that when using server-side rendering, we provide an `initialState` where
 the count is equal to `99`.  because we rendered a react app with `count === 99`, the
 resultant html shows 99 to the user immediately.  once the javascript finishes
