@@ -32,7 +32,7 @@ jobs:
               npx gatsby clean
               npx gatsby info
               DEBUG='gats*,cow*' yarn build --verbose
-              npx gh-pages -d public/
+              node scripts/publish.js
             fi
       # - run:
       #     name: release
