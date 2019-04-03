@@ -291,7 +291,8 @@ testable strategy.
 * validate configuration (i.e. user input) each time it is created/modified
 
 when configuration is managed as suggested, you will not need advanced or
-complicated local testing strategies.  simply create cofiguration (or any resource, really) then pass the resource into modules being tested.
+complicated local testing strategies.  simply create configuration (or any resource, really)
+then pass the resource into modules being tested.
 
 
 # gracefully update configuration
@@ -503,7 +504,85 @@ resultant html shows 99 to the user immediately.  once the javascript finishes
 downloading in the background, the buttons work starting from 99, because we `hydrate`d
 the react app with the same initial state (see `window.INITIAL_STATE`)!
 
-# performance - reject requests when overloaded
+# logging
 
-add [koa-toobusy](https://github.com/nswbmw/koa-toobusy) early in your middleware
-stack.
+> application logging
+
+```typescript
+// src/bin
+const config = createConfig(...)
+const logger = createLogger(config.logging)
+
+// observe the logger shared between server, middlewares, and services
+const server = await createServer({ config, logger })
+const services = await createBackgroundServices({ config, logger })
+
+// src/server
+// ...
+async function createServer ({ config, logger }) {
+  const app = new Koa()
+  const mw = await createMiddlewares({ config, logger })
+  app.use(mw)
+  return app
+}
+
+// src/middleware/cool-mw
+function createCoolMw ({ logger }) {
+  logger.debug('creating cool middleware')
+  return (ctx, next) => {
+    logger.warn('(⌐■_■) ( •_•)>⌐■-■ (•_•)')
+    await next()
+    logger.info('(•_•) ( •_•)>⌐■-■ (⌐■_■)')
+  }
+}
+
+// src/util/widget
+const debug = require('debug')('widget')
+function buildWidget (pieces) {
+  // library-esqe code is fine to log from,
+  // but generally **should't use an application-level
+  // logger**. consider modules like `debug`, or
+  // conditional console logging instead.  be weary
+  // of coupling libary code to application code and accidentally
+  // reducing portability of your work.
+  debug(`received ${pieces.length} pieces`)
+  // or
+  if (process.env.NODE_ENV === 'development') {
+    console.info(`received ${pieces.length} pieces`)
+  }
+  return pieces.map(piece => piece.name).join('-')
+}
+```
+
+* a logging provider should be created as early as possible in your application
+
+like all functional programming application resources,
+
+* pass the logging resource to all consumers via function arguments
+
+other languages, such as python, support a system level logger.
+such system level loggers, whilst convenient, are also highly stateful and subject
+to unexpected mutation by consumers.  further, doing direct resource imports,
+e.g. `import { logger } from './logger'`, has debatably harmful costs--such as
+forcing you to mock or override default runtime behavior in things like tests,
+where you may not care to see log output.
+
+* consider a standard log schema & easily parseable format
+
+such as [ndjson](http://ndjson.org) if you plan to use a logging aggregator.
+i like to configure my logger to log in `ndjson` in non-dev environments, and pretty print
+logs during development.
+
+the following example does not consider:
+
+- what content to log
+- what logging provider to use
+
+that's up to you, friend.
+
+# security
+
+- [common sense security headers - helmet](https://github.com/venables/koa-helmet)
+- [cors](https://github.com/koajs/cors)
+- [rate limiting - ratelimit](https://github.com/koajs/ratelimit)
+- [koa-toobusy](https://github.com/nswbmw/koa-toobusy)
