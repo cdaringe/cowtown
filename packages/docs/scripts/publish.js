@@ -1,7 +1,7 @@
 const ghpages = require('gh-pages')
 const path = require('path')
 
-const buildDirname = path.resolve(__dirname, '..', 'public')
+const buildDirname = path.resolve(__dirname, '..', '.docs/dist')
 
 console.log('starting publish')
 ghpages.publish(buildDirname, {

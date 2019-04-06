@@ -16,8 +16,8 @@ export const fromEnv: () => Partial<Config> = () => {
 
 // GOOD
 export const create: (partial?: Partial<Config>) => Config = (partial = {}) => {
-  // create a complete configuration container, provide universally applicable
-  // defaults
+  // create a complete configuration container, providing universally applicable
+  // defaults/fallbacks
   const { port, logLevel } = partial
   const config: Config = {
     port: port || 8080,

@@ -1,0 +1,39 @@
+---
+name: serve an api and a ui
+---
+# serve an api and a ui application
+
+it's commonplace to serve web assets from a fast fileserver, e.g. nginx, and a
+supporting api from another.  this isn't always the case, however.  it can be
+convenient to ship only one executable to provide both value streams.
+
+> api + static server
+
+```typescript
+// api-and-static/server.ts
+import mount from 'koa-mount'
+import serve = require('koa-static')
+
+// fileserver app
+const fileserver = new Koa()
+fileserver.use(serve(PUBLIC_DIRNAME))
+// api app
+const api = new Koa()
+api.use(ctx => { ctx.body = { ok: true }})
+// root app
+const app = new Koa()
+app.use(mount('/api', api))
+app.use(mount('/', fileserver))
+app.listen(3000)
+
+// $ curl localhost:3000
+// <html>
+//   <h1>ahoy, matees</h1>
+// </html>
+
+// $ curl localhost:3000/kittens/talk.txt
+// meow # served straight from disk!
+
+// $ curl localhost:3000/api
+// { "ok": true }
+```

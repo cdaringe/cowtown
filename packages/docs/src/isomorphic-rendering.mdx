@@ -1,0 +1,162 @@
+---
+name: isomorphic rendering
+---
+
+# isomorphic rendering
+
+## overview
+
+isomorphic rendering, whilst considered an advanced concept, is conceptually simple.
+the objective is to render a complete html page when a user requests your website, such that
+they may begin viewing content immediately. once the page loads, the interactive
+web-application experience downloads and instantiates itself, asyncronously.
+the final result is that user gets content faster, as hence perceives your application to
+be faster.
+
+there are many technology stacks, front-end and back-end, that enable this workflow.
+this particular demonstration uses:
+
+- [react](https://reactjs.org) & [redux](https://redux.js.org) for the ui application
+- [koa-parcel-middleware](https://www.npmjs.com/package/koa-parcel-middleware) for integrating the ui application with the server
+- `koa` for our server
+
+## strategy
+
+- create a ui application bundler instance.
+    - in this case, we will use parcel's bundler.  why do you need a bundler?  [webpack's doc cover this well](https://webpack.js.org/concepts/why-webpack/)
+- create a static asset middleware for serving ui assets (images, css files, etc)
+- create a parcel middleware _using the bundler instance_ and the static fileserver middleware
+    - this will compile your ui and serve it to browsers on request
+- register the middleware.
+
+## demonstration
+
+the web-application by default starts with minimal state.
+it's a basic counter app starting with the `count` at `0`. however,
+you will see that when using server-side rendering, we provide an `initialState` where
+the count is equal to `99`.  because we rendered a react app with `count === 99`, the
+resultant html shows 99 to the user immediately.  once the javascript finishes
+downloading in the background, the increment/decrement buttons work starting from 99, because we `hydrate`d
+the react app with the same initial state (see `window.INITIAL_STATE`)!
+
+
+> isomorphic react redux app
+
+```html
+<!--
+  react-redux-app/index.html
+  parcel _and_ our parcel middleware will use this html
+  template. note that parcel wants src=app.tsx as an
+  entrypoint, which of course isn't a valid js file ;)
+-->
+<html>
+<head>
+  <title>react-redux ssr demo</title>
+  <!-- head-content -->
+</head>
+  <div id="app"><!-- ssr-content --></div>
+  <script src="app.tsx"></script>
+</html>
+```
+
+```typescript
+// react-redux-app/app.tsx - a barebones react-redux application
+const DEFAULT_STATE = { count: 0 }
+function reducer (state = DEFAULT_STATE, action: any) {
+  // ...
+}
+
+export const App = connect(
+  state => state,
+  dispatch => ({
+    inc: () => dispatch({ type: INC }),
+    dec: () => dispatch({ type: DEC })
+  })
+)((props: any) => (
+  <div>
+    {props.count}
+    <button onClick={props.dec}>-</button>
+    <button onClick={props.inc}>+</button>
+  </div>
+))
+
+export const ConnectedApp = ({ store }: { store: Store }) => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+
+export const createAppStore = (initialState: any) =>
+  createStore(reducer, initialState)
+
+if (isNode) {
+  // render an html page in the server process,
+  // and the react application to string from within
+} else {
+  const appNode = document.getElementById('app')
+  ReactDOM.hydrate(
+    <ConnectedApp store={createAppStore((window as any).INITIAL_STATE)} />,
+    appNode
+  )
+}
+```
+
+```typescript
+// react-redux-app/server.ts
+const ENTRY_FILENAME = path.resolve(__dirname, 'index.html')
+async function start () {
+  const outFile = path.resolve(__dirname, 'dist', 'index.html')
+  const app = new Koa()
+  const outDir = path.resolve(__dirname, 'dist')
+  // create a ui application bundler
+  const options = {
+    outDir,
+    outFile,
+    watch: process.env.NODE_ENV === 'development',
+    minify: process.env.NODE_ENV !== 'development',
+    scopeHoist: false,
+    hmr: process.env.NODE_ENV === 'development',
+    detailedReport: false
+  }
+  const bundler = new Bundler(ENTRY_FILENAME, options)
+  bundler.bundle()
+  const staticMiddleware = serveStatic(outDir)
+  const isomorphicRenderMiddleware = createMiddleware({
+    bundler,
+    renderHtmlMiddleware: async (ctx, next) => {
+      // stream the html file, but with react/redux data spliced in
+      // parcel has already compiled our app now, and has
+      // a fancy _proper_ html entrypoint at outFile, which has all of our original
+      // html + comments, but modified to point to built assets (e.g. js files,
+      // versus tsx files). serve that html asset, with redux state _and_
+      // a stringified react => html tree!
+      const outFileBuffer = await fs.readFile(outFile)
+      const [preHeadClose, postHeadClose ] = outFileBuffer.toString()
+        .split(/<!--.*head-content.*-->/)
+      const [ preAppEntry, postAppEntry ] = postHeadClose
+        .split(/<!--.*ssr-content.*-->/)
+      ctx.status = 200
+      const htmlStream = new CombinedStream()
+      const initialState = { count: 99 } // you'd probably do something more interesting here
+      ;[
+        preHeadClose,
+        // send the initial state date to the browser, so it can use it for hydration
+        `<script>window.INITIAL_STATE = ${JSON.stringify(initialState)}</script>`,
+        preAppEntry,
+        // render react's html using our desired initial state
+        ReactDOMServer.renderToNodeStream(ConnectedApp({ store: createAppStore(initialState) })),
+        postAppEntry
+      ].map(content => htmlStream.append(content))
+      ctx.body = htmlStream
+      ctx.type = 'html'
+      await next()
+    },
+    staticMiddleware
+  })
+  app.use((ctx, next) => {
+    return isomorphicRenderMiddleware(ctx, next)
+  })
+  app.listen(3000)
+}
+start()
+```

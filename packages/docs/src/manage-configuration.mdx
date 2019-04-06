@@ -1,0 +1,94 @@
+---
+name: manage configuration
+---
+
+# manage configuration
+
+there are seemingly inifinite ways to manage configuration.  i generally recommend
+conforming to [12 factor](https://12factor.net/config) recommendations. however, rather
+than putting environment variable checks all over your code, prefer a pure and
+testable strategy.
+
+* create a configuration data-structure on boot, e.g. a `Config` object
+* pass [slices of] configuration deeper into your application as needed
+* attempt to keep your configuration consolidated/centralized
+* attempt to keep your configuration immutable/read-only
+* validate configuration (i.e. user input) each time it is created/replaced
+
+when configuration is managed as suggested, you will not need advanced or
+complicated local testing strategies.  simply create configuration (or any resource, really)
+then pass the resource into modules being tested. this is also often considered
+functional [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection).
+
+```typescript
+// application-config/server.ts
+import { create as createConfig, fromEnv } from './config'
+import Koa from 'koa'
+async function start () {
+  const app = new Koa()
+  const config = createConfig(fromEnv())
+  // createMiddlewares(config)
+  // createServices({ app, config: config.services })
+  console.log({ config })
+  app.listen(config.port)
+}
+start()
+
+
+// application-config/config.ts
+import joi from 'joi'
+
+type Config = {
+  port: number
+  logLevel: 'debug' | 'info' | 'warn' | 'error' | 'silent'
+}
+
+export const fromEnv: () => Partial<Config> = () => {
+  const partialConfig: Partial<Config> = {};
+  if (process.env.PORT) partialConfig.port = parseInt(process.env.PORT)
+  if (process.env.LOG_LEVEL) partialConfig.logLevel = process.env.LOG_LEVEL as any
+  return partialConfig
+}
+
+// GOOD
+export const create: (partial?: Partial<Config>) => Config = (partial = {}) => {
+  // create a complete configuration container, providing universally applicable
+  // defaults/fallbacks
+  const { port, logLevel } = partial
+  const config: Config = {
+    port: port || 8080,
+    logLevel: logLevel || 'warn'
+  }
+  validate(config)
+  return config
+}
+
+export const validate = (config: Config) => {
+  const res = joi.validate(config, {
+    port: joi.number().min(0),
+    logLevel: joi.any().valid('debug', 'info', 'warn', 'error', 'silent')
+  }, { presence: 'required' })
+  if (res.error) throw res.error
+  return config
+}
+
+// BAD
+// export const config = fromEnv() // not extensible in testing
+// export const config = create(fromEnv()) // not extensible in testing
+
+
+// examples:
+
+// defaults only
+// $ node application-config/server
+//   { config: { port: 8080, logLevel: 'warn' } }
+
+// custom port
+// $ PORT=3333 node application-config/server
+//   { config: { port: 3333, logLevel: 'warn' } }
+
+// [invalid] custom log level
+// $ LOG_LEVEL='bad-level' node application-config/server
+//   ValidationError: child "logLevel" fails because ["logLevel" must be one of
+//     [debug, info, ... ]]
+```

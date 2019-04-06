@@ -71,3 +71,4 @@ yarn-error.log
 .cache
 !*.js
 !src/**/*.js
+.docz

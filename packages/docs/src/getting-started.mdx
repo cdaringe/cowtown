@@ -1,0 +1,26 @@
+---
+name: getting started
+---
+
+# getting started
+
+start a new project, and install the barebones.
+
+it is assumed that you already have [nodejs](https://nodejs.org) installed.
+i also use [yarn](https://yarnpkg.com), but feel free to use the package
+manager of your choice (`npm` is bundled with nodejs).
+
+
+```sh
+# create a project directory
+mkdir /app && cd /app
+# initialize your VCS of choice
+git init
+# initiaze the package manager and install koa
+yarn init -y
+yarn add koa
+# optionally add typescript
+yarn add --dev typescript @types/koa
+npx tsc --init
+touch index.ts
+```
