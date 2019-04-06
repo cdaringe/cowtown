@@ -1,0 +1,21 @@
+---
+name: create hello world
+---
+# create a hello world server
+
+let's register a single middleware.  the middleware considers nothing about the
+details of your request--it blindly sets `'hello world'` to the body.
+
+```typescript
+// hello-world/server.ts
+import Koa from 'koa'
+async function start () {
+  const app = new Koa()
+  app.use(ctx => {
+    ctx.body = 'hello world'
+  })
+  app.listen(3000)
+}
+start()
+// curl localhost:3000 # => 200 "hello world"
+```

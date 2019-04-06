@@ -1,0 +1,20 @@
+---
+name: gracefully update configuration
+---
+
+# gracefully update configuration
+
+it may be the case that you do _not_ wish to teardown your service simply to swap
+configuration data. if your application has requests inflight, swapping shared, mutable configuration whilst
+outstanding handlers are in proccess may introduce nondeteriminstic or fatal behavior.
+
+if your application needs to swap config at runtime, try to handle these changes
+gracefully.  i recommend either:
+
+- gracefully restarting the server on receipt of new configuration _in process_, or
+- maintaining a stack of immutable configs, only of which one is attached to a request through its lifecycle
+
+in the latter option, when an older configuration object is no longer consumed by any outstanding requests,
+it can be `shift`ed off of the stack.  the later option also assumes that middlewares
+can functionl using configuration from of the request context alone.  if this is not the
+case, fall back to the first option.

@@ -1,0 +1,23 @@
+---
+name: perform naive routing
+---
+
+# perform naive routing
+
+you may route your application logic based on request parameters.  the `ctx`
+has various request properies off the object root, including `method` and url `path`.
+i could have used `ctx.request.path` to be more explicit.
+
+```typescript
+// dummy-routing/server.ts
+app.use(ctx => {
+  if (ctx.path === '/hello' && ctx.method === 'GET') {
+    return ctx.body = 'world'
+  }
+  if (ctx.path === '/beep' && ctx.method === 'POST') {
+    console.log('bop')
+  }
+})
+// curl localhost:3000/hello # => 200 "world"
+// curl -X POST localhost:3000/beep # logs "bop"
+```

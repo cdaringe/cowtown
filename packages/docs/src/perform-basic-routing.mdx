@@ -1,0 +1,23 @@
+---
+name: perform basic routing
+---
+# perform basic routing
+
+[koa-router](https://github.com/ZijianHe/koa-router) is the defacto router for koa.
+
+define some routes, then use `.routes()` to create a middleware from the router builder.
+`router.createMiddleware()` probably would have
+been a better method name, but we can't win them all.
+
+```typescript
+import Router from 'koa-router'
+// ...
+const app = new Koa()
+var router = new Router();
+router.get('/hello', ctx => ctx.body = 'world')
+router.post('/beep', () => console.log('bop'))
+app.use(router.routes())
+app.listen(3000)
+// curl localhost:3000/hello # => "world"
+// curl -X POST localhost:3000/beep # => 404, logs "bop"
+```

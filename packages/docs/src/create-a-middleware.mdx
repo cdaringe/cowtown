@@ -1,0 +1,39 @@
+---
+name: create a middleware
+---
+# create a piece of middleware
+
+the koa docs already cover this full well, but it's worth a quick review.
+most "work" in koa applications happen in middlewares.  your application exists
+to do work, and a request/response `context` flows up and down a stack--or tree--of
+middlewares.
+
+they're easy to write, and should be considered often when designing a workflow.
+
+anything passed to `koa.use(...)` is a piece of middleware.
+
+> a middleware is just function. let's make one.
+
+```typescript
+// babys-first-middleware/server.js
+const loggerMiddleware: Middleware<any> = async (ctx, next) => {
+  console.log('before')
+  await next() // runs the next middleware
+  console.log('after')
+}
+// curl localhost:3000 # logs:
+// before
+// after
+```
+
+> typescript buff?
+
+```typescript
+type Middleware<T> =
+  (context: T, next: () => Promise<any>) => any;
+
+// don't know typescript?  dont sweat it.
+// this statment says that a middleware is a function
+// that takes two arguments--a context,
+// and another function called `next`
+```
