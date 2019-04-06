@@ -1,10 +1,6 @@
 export default {
-  hashRouter: true,
   title: 'cowtown',
-  description: 'a comprehensive guide to server application delivery',
-  // files: '**/*.{mdx}',
-  // typescript: false,
-  // debug: true,
+  description: 'a comprehensive guide to server application development',
   menu: [
     'introduction',
     'goals',

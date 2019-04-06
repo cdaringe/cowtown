@@ -17,7 +17,7 @@
   "devDependencies": {
     "docz": "next",
     "docz-theme-default": "next",
-    "gh-pages": "^2.0.1",
+    "surge": "^0.20.3",
     "prettier-standard": "^9.1.1",
     "typescript": "^3.1.6",
     "npm-run-all": "latest"

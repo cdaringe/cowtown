@@ -29,10 +29,11 @@ jobs:
             if [ "$CIRCLE_BRANCH" = "master" ];
             then
               cd packages/docs
-              DOCZ_BASE='/cowtown/' yarn build
-              git config --global user.email "wa11edevbot@gmail.com"
-              git config --global user.name "wa11-e"
-              node scripts/publish.js
+              yarn build
+              # give surge.sh a nice entrypoint for urls that aren't back by
+              # html files
+              cp .docz/dist/index.html .docz/dist/200.html
+              npx surge .docz/dist/ --domain cowtown.surge.sh
             fi
       # - run:
       #     name: release
