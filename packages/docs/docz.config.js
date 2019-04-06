@@ -1,4 +1,5 @@
 export default {
+  hashRouter: true,
   title: 'cowtown',
   description: 'a comprehensive guide to server application delivery',
   // files: '**/*.{mdx}',

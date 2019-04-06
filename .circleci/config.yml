@@ -29,9 +29,7 @@ jobs:
             if [ "$CIRCLE_BRANCH" = "master" ];
             then
               cd packages/docs
-              npx gatsby clean
-              npx gatsby info
-              DEBUG='gats*,cow*' yarn build --verbose
+              DOCZ_BASE='/cowtown/' yarn build
               git config --global user.email "wa11edevbot@gmail.com"
               git config --global user.name "wa11-e"
               node scripts/publish.js
