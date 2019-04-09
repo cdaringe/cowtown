@@ -4,11 +4,15 @@ name: logging
 
 # logging
 
-* a logging provider should be created as early as possible in your application
+**a logging provider should be created as early as possible in your application**
+
+given the cross-cutting concern of logging, it's highly like that your imperative
+entry script and fresh resources may have log content to share with the user.
+create it early.
 
 like all functional programming application resources,
 
-* pass the logging resource to all consumers via function arguments
+**pass the logging resource to all consumers via function arguments**
 
 other languages, such as python, support a system level logger.
 such system level loggers, whilst convenient, are also highly stateful and subject
@@ -17,9 +21,10 @@ e.g. `import { logger } from './logger'`, has debatably harmful costs--such as
 forcing you to mock or override default runtime behavior in things like tests,
 where you may not care to see log output.
 
-* consider a standard log schema & easily parseable format
+**consider a standard log schema & easily parseable format**
 
-such as [ndjson](http://ndjson.org) if you plan to use a logging aggregator.
+the most commonly selected format is [ndjson](http://ndjson.org). this will be
+particularly helpful if you plan to use a logging aggregator--parsing will be very simple.
 i like to configure my logger to log in `ndjson` in non-dev environments, and pretty print
 logs during development.
 
