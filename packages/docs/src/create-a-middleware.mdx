@@ -4,13 +4,11 @@ name: create a middleware
 # create a piece of middleware
 
 the koa docs already cover this full well, but it's worth a quick review.
-most "work" in koa applications happen in middlewares.  your application exists
-to do work, and a request/response `context` flows up and down a stack--or tree--of
+most work in koa applications happen in middlewares.  your application exists
+to do work, and a request/response `context` flows up and down a stack of
 middlewares.
 
-they're easy to write, and should be considered often when designing a workflow.
-
-anything passed to `koa.use(...)` is a piece of middleware.
+middleware is easy to write, and should be considered often when designing a workflow.
 
 > a middleware is just function. let's make one.
 

@@ -19,5 +19,8 @@ export default {
     'isomorphic rendering',
     'logging',
     'security'
-  ]
+  ],
+  themeConfig: {
+    mode: 'dark'
+  }
 }
