@@ -1,6 +1,11 @@
 export default {
   title: 'cowtown',
   description: 'a comprehensive guide to server application development',
+  htmlContext: {
+    favicon: 'public/favicon.ico'
+  },
+  indexHtml: 'public/index.html',
+  public: 'public',
   menu: [
     'introduction',
     'goals',
