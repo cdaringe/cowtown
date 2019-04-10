@@ -1,4 +1,4 @@
-import Koa from 'koa'
+import Koa = require('koa')
 async function start () {
   const app = new Koa()
   app.use(ctx => {

@@ -7,7 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{{ title }}</title>
     {{ head }}
-    <script src="https://embed.runkit.com"></script>
+    <script src="https://embed.runkit.com" async></script>
+    <style>
+      .repl-button {
+        color: #1FB6FF;
+        cursor: pointer;
+      }
+      .repl-button:hover {
+        color: #1f7fff;
+        text-decoration: underline;
+      }
+      .repl-placeholder {
+        margin-top: 6px;
+        width: 400px;
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

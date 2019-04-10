@@ -11,7 +11,7 @@
     "build": "tsc",
     "clean:deps": "for p in $(ls packages/); do echo $p && rm -rf packages/$p/{node_modules,*.lock}; done;",
     "test": "lerna exec -- yarn test",
-    "format": "prettier-standard '{src,test,scripts,packages}/**/*.{ts,tsx}'",
+    "format": "prettier-standard '{src,test,scripts,packages}/**/*.{js,ts,tsx}'",
     "lint": "eslint '{src,test,scripts,packages}/**/*.{ts,tsx}' --fix"
   },
   "devDependencies": {

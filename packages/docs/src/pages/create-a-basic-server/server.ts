@@ -1,4 +1,4 @@
-import Koa from 'koa'
+import Koa = require('koa')
 
 async function start () {
   const koa = new Koa()

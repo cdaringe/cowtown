@@ -1,0 +1,26 @@
+---
+name: manage configuration
+route: /manage-configuration
+---
+
+import { Demo } from './Demo'
+
+# manage configuration
+
+there are seemingly inifinite ways to manage configuration.  i generally recommend
+conforming to [12 factor](https://12factor.net/config) recommendations. however, rather
+than putting environment variable checks all over your code, prefer a pure and
+testable strategy.
+
+* create a configuration data-structure on boot, e.g. a `Config` object
+* pass [slices of] configuration deeper into your application as needed
+* attempt to keep your configuration consolidated/centralized
+* attempt to keep your configuration immutable/read-only
+* validate configuration (i.e. user input) each time it is created/replaced
+
+when configuration is managed as suggested, you will not need advanced or
+complicated local testing strategies.  simply create configuration (or any resource, really)
+then pass the resource into modules being tested. this is also often considered
+functional [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection).
+
+<div><Demo /></div>

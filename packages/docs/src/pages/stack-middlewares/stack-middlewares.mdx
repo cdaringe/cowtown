@@ -1,0 +1,13 @@
+---
+name: stack middlewares
+route: /stack-middlewares
+---
+
+import { Demo } from './Demo'
+
+# stack middlewares together
+
+middlewares get called in the order that they are registered with `app.use(...)`.
+when a middleware calls `next()`, koa calls the next middleware downsteam if are any available.
+
+<div><Demo /></div>

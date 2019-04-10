@@ -1,4 +1,5 @@
-import joi from 'joi'
+// config.ts
+import joi = require('joi')
 
 type Config = {
   port: number
@@ -14,10 +15,11 @@ export const fromEnv: () => Partial<Config> = () => {
   return partialConfig
 }
 
-// GOOD
-export const create: (partial?: Partial<Config>) => Config = (partial = {}) => {
-  // create a complete configuration container, providing universally applicable
-  // defaults/fallbacks
+export const createConfig: (partial?: Partial<Config>) => Config = (
+  partial = {}
+) => {
+  // create a complete configuration container,
+  // providing universally applicable defaults/fallbacks
   const { port, logLevel } = partial
   const config: Config = {
     port: port || 8080,
@@ -40,6 +42,14 @@ export const validate = (config: Config) => {
   return config
 }
 
-// BAD
-// export const config = fromEnv() // not extensible in testing
-// export const config = create(fromEnv()) // not extensible in testing
+// server.ts
+import Koa = require('koa')
+async function start () {
+  const config = createConfig(fromEnv())
+  const app = new Koa()
+  // createMiddlewares(config)
+  // createServices({ app, config })
+  console.log({ config })
+  app.listen(config.port)
+}
+start()

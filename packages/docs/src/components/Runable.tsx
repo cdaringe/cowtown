@@ -1,4 +1,5 @@
 import React from 'react'
+import { ReplPlaceholder } from './ReplPlaceholder'
 const Embed = require('react-runkit')
 interface RunkitEmbed {
   // Specify the source code that the notebook will use.
@@ -34,6 +35,37 @@ interface RunkitEmbed {
   onURLChanged?: () => void
   onEvaluate?: () => void
 }
-export const Runkit: React.FC<RunkitEmbed> = props => (
-  <Embed mode={'endpoint'} {...props} />
-)
+export class Runkit extends React.PureComponent<
+  RunkitEmbed & { sourceCode?: string },
+  { isAlive: boolean }
+> {
+  constructor (props: any) {
+    super(props)
+    this.state = {
+      isAlive: false
+    }
+  }
+  setAlive = () => {
+    if (!this.state.isAlive) this.setState({ isAlive: true })
+  }
+  render () {
+    const { isAlive } = this.state
+    return (
+      <React.Fragment>
+        {!isAlive && (
+          <a
+            onClick={evt => {
+              evt.preventDefault()
+              this.setAlive()
+            }}
+            className='repl-button'
+          >
+            > Try in REPL
+          </a>
+        )}
+        {!isAlive && <ReplPlaceholder />}
+        {!!isAlive && <Embed mode='endpoint' {...this.props} />}
+      </React.Fragment>
+    )
+  }
+}

@@ -23,22 +23,28 @@ jobs:
       - run:
           command: |
             set -euxo pipefail
-            # compile the scripts/ dir, which has ts script that generate artifacts
-            # that _other_ ts files import.  ya, i created a chicken-egg scenario. uncool.
+            # compile the docs/scripts/ directory, which has ts script that is used
+            # to generate artifacts that _other_ ts files import. :(
+            # ya, i created a chicken-egg scenario. uncool. we could ts-node that
+            # script instead, but this works OK, albeit a bit noisy on 1st-compile
             _script_build_res=$(cd packages/docs && npx tsc || true);
-            # give surge.sh a nice entrypoint for urls that aren't back by
-              # html files
+
+            # make the js pretty before baking content into the doc demos
+            yarn format
+
+            # build docs
             _docs_build_res=$(cd packages/docs && yarn build)
-            # ^ end hacks
+
             yarn build
             yarn test
             yarn lint
             cd packages/docs
+
+            # release
             if [ "$CIRCLE_BRANCH" = "master" ];
             then
+              # give surge.sh a nice entrypoint for urls that aren't back by
+              # html files
               cp .docz/dist/index.html .docz/dist/200.html
               npx surge .docz/dist/ --domain cowtown.surge.sh
             fi
-      # - run:
-      #     name: release
-      #     command: npm run semantic-release || true
