@@ -56,7 +56,6 @@ typings/
 
 # gatsby files
 .cache/
-public
 
 # Mac files
 .DS_Store
@@ -72,3 +71,5 @@ yarn-error.log
 !*.js
 !src/**/*.js
 .docz
+demoSourceAsStrings
+*.js
