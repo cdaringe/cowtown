@@ -10,21 +10,21 @@ middlewares.
 
 middleware is easy to write, and should be considered often when designing a workflow.
 
-> a middleware is just function. let's make one.
+**a middleware is just function. let's make one.**
 
 ```typescript
 // babys-first-middleware/server.js
 const loggerMiddleware: Middleware<any> = async (ctx, next) => {
-  console.log('before')
+  console.log('started')
   await next() // runs the next middleware
-  console.log('after')
+  console.log('finished')
 }
 // curl localhost:3000 # logs:
-// before
-// after
+// started
+// finished
 ```
 
-> typescript buff?
+**typescript buff?**
 
 ```typescript
 type Middleware<T> =

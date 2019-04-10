@@ -11,9 +11,6 @@
     },
     {
       "path": "packages/docs"
-    },
-    {
-      "path": "packages/docs-apps"
     }
   ],
 	"settings": {

@@ -1,4 +1,5 @@
 import React from 'react'
+const Embed = require('react-runkit')
 interface RunkitEmbed {
   // Specify the source code that the notebook will use.
   source: string
@@ -33,4 +34,6 @@ interface RunkitEmbed {
   onURLChanged?: () => void
   onEvaluate?: () => void
 }
-export const Embed: React.FC<RunkitEmbed> = require('react-runkit')
+export const Runkit: React.FC<RunkitEmbed> = props => (
+  <Embed mode={'endpoint'} {...props} />
+)

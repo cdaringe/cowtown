@@ -27,5 +27,8 @@ export default {
   ],
   themeConfig: {
     mode: 'dark'
-  }
+  },
+  codeSandbox: false,
+  // debug: true,
+  typescript: true
 }

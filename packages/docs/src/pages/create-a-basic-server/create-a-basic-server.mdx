@@ -2,18 +2,11 @@
 name: create a basic server
 ---
 
+import { Demo } from './Demo'
+
 # create a basic server
+
+<div><Demo /></div>
 
 the following is a minimal koa server.  note that when you stream nothing back
 to clients, the default http response is `404`.
-
-```typescript
-// 404/server.ts
-import Koa from 'koa'
-async function start () {
-  const koa = new Koa()
-  koa.listen(3000)
-}
-start()
-// curl localhost:3000 # => 404
-```

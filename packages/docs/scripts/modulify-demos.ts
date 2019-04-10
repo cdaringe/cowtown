@@ -29,9 +29,9 @@ async function flushEntry () {
   const importParts = Array.from(demoFiles.entries()).map(([filename]) =>
     toParts(filename)
   )
-  const imports = importParts
+  const importsExports = importParts
     .map(({ basename, demoname, varname }) => {
-      return `const ${varname}: string = require('${path.resolve(
+      return `export const ${varname}: string = require('${path.resolve(
         DEMO_SRC_AS_MODULES_DIRNAME,
         demoname,
         `${basename}.json`
@@ -40,12 +40,7 @@ async function flushEntry () {
     .join('\n')
   await fs.writeFile(
     path.join(DEMO_SRC_AS_MODULES_DIRNAME, 'demoSource.ts'),
-    `
-${imports}
-export const sourceByDemoName = {
-  ${importParts.map(({ varname }) => `${varname}`).join('\n  ')}
-}
-  `.trim()
+    importsExports
   )
 }
 
@@ -54,12 +49,17 @@ async function onChange (relativeFilename: string) {
   demoFiles.add(filename)
   const { basename, demoname } = toParts(filename)
   log(`modulifying ${relativeFilename}`)
-  if (!basename || !demoname) { throw new Error(`no demoname [${demoname}]or basename [${basename}]`) }
+  if (!basename || !demoname) {
+    throw new Error(`no demoname [${demoname}]or basename [${basename}]`)
+  }
   const demoDirname = path.join(DEMO_SRC_AS_MODULES_DIRNAME, demoname)
   await fs.mkdirp(demoDirname)
+  const text = (await fs.readFile(filename))
+    .toString()
+    .replace(/import (.*) from (.*)/g, 'const $1 = require($2)')
   await fs.writeFile(
     path.resolve(demoDirname, `${basename}.json`),
-    `${JSON.stringify({ text: (await fs.readFile(filename)).toString() })}`
+    `${JSON.stringify({ text })}`
   )
   flushEntry()
 }
@@ -75,7 +75,6 @@ log('starting modulify-demos')
 emitter.on('add', onChange)
 emitter.on('change', onChange)
 emitter.on('unlink', onRm)
-console.log(process.argv)
 if (process.argv[2] === '--build') {
   emitter.on('ready', () => process.exit(0))
 } else if (process.argv[2] === '--watch') {

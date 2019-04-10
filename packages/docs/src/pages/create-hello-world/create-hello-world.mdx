@@ -1,12 +1,17 @@
 ---
 name: create hello world
 ---
+
+import { Demo } from './Demo'
+
 # create a hello world server
 
 let's register a single middleware.  the middleware considers nothing about the
 details of your request--it blindly sets `'hello world'` to the body.
 
-```typescript
+<div><Demo /></div>
+
+<!-- ```typescript
 // hello-world/server.ts
 import Koa from 'koa'
 async function start () {
@@ -18,4 +23,4 @@ async function start () {
 }
 start()
 // curl localhost:3000 # => 200 "hello world"
-```
+``` -->
