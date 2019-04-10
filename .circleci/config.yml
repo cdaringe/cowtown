@@ -20,18 +20,22 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn build
-      - run: yarn test
-      - run: yarn lint
       - run:
           command: |
             set -euxo pipefail
+            # compile the scripts/ dir, which has ts script that generate artifacts
+            # that _other_ ts files import.  ya, i created a chicken-egg scenario. uncool.
+            _script_build_res=$(cd packages/docs && npx tsc || true);
+            # give surge.sh a nice entrypoint for urls that aren't back by
+              # html files
+            _docs_build_res=$(cd packages/docs && yarn build)
+            # ^ end hacks
+            yarn build
+            yarn test
+            yarn lint
+            cd packages/docs
             if [ "$CIRCLE_BRANCH" = "master" ];
             then
-              cd packages/docs
-              yarn build
-              # give surge.sh a nice entrypoint for urls that aren't back by
-              # html files
               cp .docz/dist/index.html .docz/dist/200.html
               npx surge .docz/dist/ --domain cowtown.surge.sh
             fi
