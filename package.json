@@ -15,7 +15,7 @@
     "lint": "eslint '{src,test,scripts,packages}/**/*.{ts,tsx}' --fix"
   },
   "devDependencies": {
-    "@types/node": "^11.13.0",
+    "@types/node": "^12.0.1",
     "@typescript-eslint/eslint-plugin": "^1.5.0",
     "@typescript-eslint/parser": "^1.5.0",
     "husky": "^1.3.1",
