@@ -23,14 +23,14 @@ function reducer (state = DEFAULT_STATE, action: any) {
 export const App = connect(
   state => state,
   dispatch => ({
-    inc: () => dispatch({ type: INC }),
-    dec: () => dispatch({ type: DEC })
+    handleInc: () => dispatch({ type: INC }),
+    handleDec: () => dispatch({ type: DEC })
   })
-)((props: any) => (
+)(({ handleDec, handleInc, count }: any) => (
   <div>
-    {props.count}
-    <button onClick={props.dec}>-</button>
-    <button onClick={props.inc}>+</button>
+    {count}
+    <button onClick={handleDec}>-</button>
+    <button onClick={handleInc}>+</button>
   </div>
 ))
 
@@ -54,7 +54,6 @@ if (isNode) {
   )
 }
 
-// enable hot module reloading
 if ((module as any).hot) {
   ;(module as any).hot.accept()
 }

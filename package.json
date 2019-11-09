@@ -12,38 +12,38 @@
     "clean:deps": "for p in $(ls packages/); do echo $p && rm -rf packages/$p/{node_modules,*.lock}; done;",
     "test": "lerna exec -- yarn test",
     "format": "prettier-standard '{src,test,scripts,packages}/**/*.{js,ts,tsx}'",
-    "lint": "eslint '{src,test,scripts,packages}/**/*.{ts,tsx}' --fix"
+    "lint": "standardx '{src,test,scripts,scripts}/**/*.{ts,tsx}' --fix"
   },
   "devDependencies": {
     "@types/node": "^12.0.0",
-    "@typescript-eslint/eslint-plugin": "^1.5.0",
-    "@typescript-eslint/parser": "^1.5.0",
-    "husky": "^3.0.5",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
+    "husky": "^3.0.9",
     "lerna": "^3.13.1",
-    "lint-staged": "^9.0.0",
-    "prettier-standard": "^11.0.0",
-    "typescript": "^3.1.6"
+    "lint-staged": "^9.4.2",
+    "prettier-standard": "^15.0.1",
+    "standardx": "^5.0.0",
+    "typescript": "^3.7.2"
+  },
+  "lint-staged": {
+    "{src,test,scripts,packages}/**/*.{ts,tsx}": [
+      "yarn format",
+      "yarn lint",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
-  "lint-staged": {
-    "linters": {
-      "{src,test,scripts,packages}/**/*.{ts,tsx}": [
-        "yarn format",
-        "yarn lint",
-        "git add"
-      ]
-    }
-  },
-  "dependencies": {
-    "eslint": "^5.15.3",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-node": "^9.0.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
+  "standardx": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
+    ],
+    "ignore": [
+      "**/*.d.ts"
+    ]
   }
 }
