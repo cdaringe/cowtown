@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "esnext",
+    "noEmit": false,
+    "sourceRoot": "src",
+    "sourceMap": true,
+    "outDir": "build_jsextractor"
+  },
+  "exclude": ["scripts", "src/**/demoSource.ts"]
+}

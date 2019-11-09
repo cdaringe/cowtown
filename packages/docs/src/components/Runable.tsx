@@ -1,6 +1,9 @@
 import React from 'react'
 import { ReplPlaceholder } from './ReplPlaceholder'
 const Embed = require('react-runkit')
+
+// export { Code } from 'docz'
+
 interface RunkitEmbed {
   // Specify the source code that the notebook will use.
   source: string
@@ -45,13 +48,15 @@ export class Runkit extends React.PureComponent<
       isAlive: false
     }
   }
+
   setAlive = () => {
     if (!this.state.isAlive) this.setState({ isAlive: true })
   }
+
   render () {
     const { isAlive } = this.state
     return (
-      <React.Fragment>
+      <>
         {!isAlive && (
           <a
             onClick={evt => {
@@ -65,7 +70,7 @@ export class Runkit extends React.PureComponent<
         )}
         {!isAlive && <ReplPlaceholder />}
         {!!isAlive && <Embed mode='endpoint' {...this.props} />}
-      </React.Fragment>
+      </>
     )
   }
 }

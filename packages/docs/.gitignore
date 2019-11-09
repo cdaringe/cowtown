@@ -73,3 +73,5 @@ yarn-error.log
 .docz
 demoSourceAsStrings
 *.js
+!doczrc.js
+build_jsextractor

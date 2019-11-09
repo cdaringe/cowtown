@@ -4,4 +4,4 @@ cowtown docs
 
 ## usage
 
-- `yarn develop`
+- `yarn start`
