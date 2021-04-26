@@ -7,7 +7,7 @@
     "test": "ava test/**/*.test.js"
   },
   "devDependencies": {
-    "@types/dotenv-safe": "^5.0.3",
+    "@types/dotenv-safe": "5.0.4",
     "@types/get-port": "^4.0.1",
     "@types/koa": "^2.0.48",
     "@types/node-fetch": "^2.1.6",
