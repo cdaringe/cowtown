@@ -56,7 +56,7 @@
     "react-runkit": "^0.9.0",
     "react-router": "^5.0.0",
     "react": "^16.8.6",
-    "redux": "^4.0.1",
+    "redux": "4.1.0",
     "surge": "^0.20.3"
   }
 }
