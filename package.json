@@ -20,7 +20,7 @@
     "@typescript-eslint/parser": "^2.6.1",
     "husky": "^3.0.9",
     "lerna": "^3.13.1",
-    "lint-staged": "^9.4.2",
+    "lint-staged": "9.5.0",
     "prettier-standard": "^15.0.1",
     "standardx": "^5.0.0",
     "typescript": "^3.7.2"
