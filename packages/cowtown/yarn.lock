@@ -364,7 +364,7 @@
     "@types/keygrip" "*"
     "@types/node" "*"
 
-"@types/dotenv-safe@^5.0.3":
+"@types/dotenv-safe@5.0.3":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@types/dotenv-safe/-/dotenv-safe-5.0.3.tgz#dddfcf655aad72b78921aceb3afcc95be8301f82"
   integrity sha512-H2A6p93WegICjH84+pGCsvd8YskkfDrfwJGeTFGzNgw3RrLEZTyChK3QpagiICOWT6E7ARm2e3sHHuxMPfXjZw==
@@ -395,7 +395,7 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
-"@types/get-port@^4.0.1":
+"@types/get-port@4.2.0":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@types/get-port/-/get-port-4.2.0.tgz#4fc44616c737d37d3ee7926d86fa975d0afba5e4"
   integrity sha512-Iv2FAb5RnIk/eFO2CTu8k+0VMmIR15pKbcqRWi+s3ydW+aKXlN2yemP92SrO++ERyJx+p6Ie1ggbLBMbU1SjiQ==
@@ -424,7 +424,7 @@
   dependencies:
     "@types/koa" "*"
 
-"@types/koa@*", "@types/koa@^2.0.48":
+"@types/koa@*", "@types/koa@2.0.48":
   version "2.0.48"
   resolved "https://registry.yarnpkg.com/@types/koa/-/koa-2.0.48.tgz#29162783029d3e5df8b58c55f6bf0d35f78fc39f"
   integrity sha512-CiIUYhHlOFJhSCTmsFoFkV2t9ij1JwW26nt0W9XZoWTvmAw6zTE0+k3IAoGICtjzIfhZpZcO323NHmI1LGmdDw==
@@ -441,7 +441,7 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.1.tgz#dc488842312a7f075149312905b5e3c0b054c79d"
   integrity sha512-FwI9gX75FgVBJ7ywgnq/P7tw+/o1GUbtP0KzbtusLigAOgIgNISRK0ZPl4qertvXSIE8YbsVJueQ90cDt9YYyw==
 
-"@types/node-fetch@^2.1.6":
+"@types/node-fetch@2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.3.0.tgz#d1da24d56e9f1774a0e50a93cc8ee2a7922f4f0e"
   integrity sha512-8hiAWrp7m9c0+LWLSMrUdPAoTJogvarqUdpQsyV9BlWnxVHTpdopNW0ldB4H8s/G4dg/KJLpqJIMb0GaZDf8/Q==
@@ -470,7 +470,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-router@^5.0.4":
+"@types/react-router@5.0.5":
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.0.5.tgz#f28f5e0b65e2a9870e0f08f57e4f50361f8ad1a6"
   integrity sha512-FX/K5Vnm9q9O3zTC0v3XF08q24ccPz24E/nVDxWSzcBW/Wuxq7lCD6cc5qr1PNOz8OdaDA4Jedjs2evf4jw/aQ==
@@ -478,7 +478,7 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.8.8":
+"@types/react@*", "@types/react@16.8.13":
   version "16.8.13"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.13.tgz#a82b15aad9ab91c40edca0d6889b7745ae24f053"
   integrity sha512-otJ4ntMuHGrvm67CdDJMAls4WqotmAmW0g3HmWi9LCjSWXrxoXY/nHXrtmMfvPEEmGFNm6NdgMsJmnfH820Qaw==
@@ -646,7 +646,7 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-ava@^1.3.1:
+ava@1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/ava/-/ava-1.4.1.tgz#4a59289e0c9728e492ec3a5be21d1072636be172"
   integrity sha512-wKpgOPTL7hJSBWpfbU4SA8rlsTZrph9g9g7qYDV7M6uK1rKeW8oCUJWRwCd8B24S4N0Y5myf6cTEnA66WIk0sA==
@@ -1286,7 +1286,7 @@ dot-prop@^4.1.0, dot-prop@^4.2.0:
   dependencies:
     is-obj "^1.0.0"
 
-dotenv-safe@^8.1.0:
+dotenv-safe@8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/dotenv-safe/-/dotenv-safe-8.1.0.tgz#9046f1c9b70183d49275c0b6c383db37f432b346"
   integrity sha512-ONrR6gKNtaaQxV1GUvlLB4jHXtEixUe0a+x5QdnYdKJKelg9J/Kv6hPHXYBJqgJ6HBrEFtS2g2NcB6Hx78/l/Q==
@@ -1552,7 +1552,7 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-get-port@*, get-port@^5.0.0:
+get-port@*, get-port@5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/get-port/-/get-port-5.0.0.tgz#aa22b6b86fd926dd7884de3e23332c9f70c031a6"
   integrity sha512-imzMU0FjsZqNa6BqOjbbW6w5BivHIuQKopjpPqcnx0AVHJQKCxK1O+Ab3OrVXhrekqfVMjwA9ZYu062R+KcIsQ==
@@ -2181,7 +2181,7 @@ koa-is-json@^1.0.0:
   resolved "https://registry.yarnpkg.com/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha1-JzwH7c3Ljfaiwat9We52SRRR7BQ=
 
-koa@^2.7.0:
+koa@2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/koa/-/koa-2.7.0.tgz#7e00843506942b9d82c6cc33749f657c6e5e7adf"
   integrity sha512-7ojD05s2Q+hFudF8tDLZ1CpCdVZw8JQELWSkcfG9bdtoTDzMmkRF6BQBU7JzIzCCOY3xd3tftiy/loHBUYaY2Q==
@@ -2991,7 +2991,7 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@^16.8.4:
+react-dom@16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
   integrity sha512-1nL7PIq9LTL3fthPqwkvr2zY7phIPjYrT0jp4HjyEQrEROnw4dG41VVwi/wfoCneoleqrNX7iAD+pXebJZwrwA==
@@ -3006,7 +3006,7 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
-react-router@^5.0.0:
+react-router@5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-5.0.0.tgz#349863f769ffc2fa10ee7331a4296e86bc12879d"
   integrity sha512-6EQDakGdLG/it2x9EaCt9ZpEEPxnd0OCLBHQ1AcITAAx7nCnyvnzf76jKWG1s2/oJ7SSviUgfWHofdYljFexsA==
@@ -3022,7 +3022,7 @@ react-router@^5.0.0:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react@^16.8.4:
+react@16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
