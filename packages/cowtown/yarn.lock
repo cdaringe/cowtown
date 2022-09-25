@@ -402,10 +402,10 @@
   dependencies:
     get-port "*"
 
-"@types/history@*":
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"
-  integrity sha512-ui3WwXmjTaY73fOQ3/m3nnajU/Orhi6cEu5rzX+BrAAJxa3eITXZ5ch9suPqtM03OWhAHhPSyBGCN4UKoxO20Q==
+"@types/history@^4.7.11":
+  version "4.7.11"
+  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.11.tgz#56588b17ae8f50c53983a524fc3cc47437969d64"
+  integrity sha512-qjDJRrmvBMiTx+jyLxvLfJU7UznFuokDv4f3WRuriHKERccVpFU+8XMQUAbDzoiJCsmexxRExQeMwwCdamSKDA==
 
 "@types/http-assert@*":
   version "1.4.0"
@@ -470,12 +470,12 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-router@^5.0.4":
-  version "5.0.5"
-  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.0.5.tgz#f28f5e0b65e2a9870e0f08f57e4f50361f8ad1a6"
-  integrity sha512-FX/K5Vnm9q9O3zTC0v3XF08q24ccPz24E/nVDxWSzcBW/Wuxq7lCD6cc5qr1PNOz8OdaDA4Jedjs2evf4jw/aQ==
+"@types/react-router@5.1.19":
+  version "5.1.19"
+  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.1.19.tgz#9b404246fba7f91474d7008a3d48c17b6e075ad6"
+  integrity sha512-Fv/5kb2STAEMT3wHzdKQK2z8xKq38EDIGVrutYLmQVVLe+4orDFquU52hQrULnEHinMKv9FSA6lf9+uNT1ITtA==
   dependencies:
-    "@types/history" "*"
+    "@types/history" "^4.7.11"
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^16.8.8":
