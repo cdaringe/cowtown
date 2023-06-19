@@ -364,19 +364,12 @@
     "@types/keygrip" "*"
     "@types/node" "*"
 
-"@types/dotenv-safe@^5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@types/dotenv-safe/-/dotenv-safe-5.0.3.tgz#dddfcf655aad72b78921aceb3afcc95be8301f82"
-  integrity sha512-H2A6p93WegICjH84+pGCsvd8YskkfDrfwJGeTFGzNgw3RrLEZTyChK3QpagiICOWT6E7ARm2e3sHHuxMPfXjZw==
+"@types/dotenv-safe@^8.0.0":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@types/dotenv-safe/-/dotenv-safe-8.1.2.tgz#72f126969f445af5654efd3167deabc2cbc6c24e"
+  integrity sha512-R/B/wIMda6lRE2P1H0vwSoJsV78IOkhccE4vIvmKZQNXOIjiU0QyJsUXwSotBxOPZFZ/oOnjCa3+kK5kVJwGyw==
   dependencies:
-    "@types/dotenv" "*"
-
-"@types/dotenv@*":
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-6.1.1.tgz#f7ce1cc4fe34f0a4373ba99fefa437b0bec54b46"
-  integrity sha512-ftQl3DtBvqHl9L16tpqqzA4YzCSXZfi7g8cQceTz5rOlYtk/IZbFjAv3mLOQlNIgOaylCQWQoBdDQHPgEBJPHg==
-  dependencies:
-    "@types/node" "*"
+    dotenv "^8.2.0"
 
 "@types/express-serve-static-core@*":
   version "4.16.2"
@@ -1297,6 +1290,11 @@ dotenv@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.1.0.tgz#d811e178652bfb8a1e593c6dd704ec7e90d85ea2"
   integrity sha512-GUE3gqcDCaMltj2++g6bRQ5rBJWtkWTmqmD0fo1RnnMuUqHNCt2oTPeDnS9n6fKYvlhn7AeBkb38lymBtWBQdA==
+
+dotenv@^8.2.0:
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.6.0.tgz#061af664d19f7f4d8fc6e4ff9b584ce237adcb8b"
+  integrity sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==
 
 duplexer3@^0.1.4:
   version "0.1.4"
