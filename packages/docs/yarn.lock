@@ -1452,9 +1452,7 @@
     "@types/koa" "*"
 
 "@types/koa-static@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@types/koa-static/-/koa-static-4.0.1.tgz#b740d80a549b0a0a7a3b38918daecde88a7a50ec"
-  integrity sha512-SSpct5fEcAeRkBHa3RiwCIRfDHcD1cZRhwRF///ZfvRt8KhoqRrhK6wpDlYPk/vWHVFE9hPGqh68bhzsHkir4w==
+  version "4.0.4"
   dependencies:
     "@types/koa" "*"
     "@types/koa-send" "*"
