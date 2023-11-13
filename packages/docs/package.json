@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@types/chokidar":"^2.1.3",
-    "@types/combined-stream": "1.0.2",
+    "@types/combined-stream": "1.0.6",
     "@types/joi": "^14.3.2",
     "@types/fs-extra": "^8.0.0",
     "@types/koa-mount": "^3.0.1",
